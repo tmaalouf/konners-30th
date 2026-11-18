@@ -520,7 +520,7 @@ body.in-intro #bgfx{display:none}
       <button class="btn sm" id="closeBoard">✕ Close</button>
     </div>
     <div class="tbl" id="boardTable"></div>
-    <div class="legend">✔ in · ? maybe · ✖ can't · ☮ sober sidekick · 🎬 watched the doc · 🎟 has ticket</div>
+    <div class="legend">✔ in · ? maybe · ✖ can't</div>
     <div class="tally" id="boardTally"></div>
   </div>
 </div>
@@ -556,24 +556,19 @@ const STOPS = [
   { id:'panhandle', lv:'LV 2', emoji:'🐕', title:'Panhandle Pup Patrol', time:'~12:00 PM', place:'The Panhandle', addr:'The Panhandle, San Francisco, CA',
     desc:'Stroll west down the Panhandle. Every dog you see: +1 XP. Every dog you pet: +5 XP.' },
   { id:'ggp', lv:'LV 3', emoji:'🌳', title:'Meander Through Golden Gate Park', time:'~12:45–2:30 PM', place:'Golden Gate Park', addr:'Golden Gate Park, San Francisco, CA',
-    desc:'Meander, chat and play games (fair warning: the birthday girl is undefeated at kickball, flag football and dodgeball). Somewhere in there, the Theranos Debrief: we break down the Elizabeth Holmes doc "You Can See Everything" (A24). REQUIRED: watch it before Saturday. It\'s only in theaters and runs almost 3 hours, so plan ahead.',
-    extra:'watched' },
+    desc:'Meander, chat and play games (fair warning: the birthday girl is undefeated at kickball, flag football and dodgeball). Somewhere in there, the Theranos Debrief: we break down the Elizabeth Holmes doc "You Can See Everything" (A24). Homework: watch it before Saturday. It\'s only in theaters and runs almost 3 hours, so plan ahead.' },
   { id:'adventure', lv:'LV 4 · CHOOSE YOUR ADVENTURE', emoji:'🎲', title:'Beach or Mushrooms?', time:'~2:30–4:30 PM', place:'Ocean Beach or Golden Gate Park', addr:'Golden Gate Park, San Francisco, CA',
-    desc:"We'll do ONE of these, depending on the weather and birthday-girl vibes: 🌊 keep walking west to Ocean Beach (if it's sunny), or 🍄 a mushroom experience in the park for anyone who wants it (sober sidekicks are just as welcome). Cast your vote!",
-    opts:[ {v:'yes',l:"I'm in either way"}, {v:'maybe',l:'Maybe'}, {v:'no',l:"Can't"} ],
-    vote:{ title:'VOTE: BEACH OR MUSHROOMS?', opts:[['beach','🌊 Ocean Beach'],['shrooms','🍄 Mushroom Kingdom'],['either','🤷 Either!']] } },
+    desc:"We'll do ONE of these, depending on the weather and birthday-girl vibes: 🌊 keep walking west to Ocean Beach (if it's sunny), or 🍄 a mushroom experience in the park for anyone who wants it (sober sidekicks are just as welcome)." },
   { id:'dinner', lv:'LV 5', emoji:'🍝', title:'Feast in the Inner Sunset', time:'~4:30 PM', place:'9th Ave & Irving St', addr:'9th Ave & Irving St, San Francisco, CA',
-    desc:"Refuel on 9th & Irving. Vote below: Fiorella (Italian), Marnee Thai, or whatever we're feeling.",
-    vote:{ title:'VOTE FOR DINNER', opts:[['fiorella','🍕 Fiorella'],['marnee','🍜 Marnee Thai'],['whatever','🎲 Whatever we feel']] } },
+    desc:"Refuel on 9th & Irving: Fiorella (Italian), Marnee Thai, or whatever we're feeling." },
   { id:'ntrain', lv:'LV 6', emoji:'🚋', title:'Ride the N Judah', time:'~5:45 PM', place:'N Judah → the neighborhood', addr:'Irving St & 9th Ave, San Francisco, CA',
     desc:'Take the N home, then walk the neighborhood and drop everyone off at their home base.' },
   { id:'nap', lv:'LV 7', emoji:'💤', title:'The 30-Year-Old Nap', time:'~6:00 PM nap · 6:45 PM regroup', place:'Your home base', home:true,
     desc:"Home for a quick recharge. At 30, a nap isn't a break, it's a lifestyle. Rest up before the Jonas Brothers, then regroup to head to the show." },
   { id:'concert', lv:'LV 8', emoji:'🎤', title:'Jonas Brothers: Final Boss', time:'Doors 6:30 PM · Show 7:30 PM', place:'Chase Center', addr:'1 Warriors Way, San Francisco, CA',
-    desc:'The Burning Up Tour All Over Again. Sing every word.', extra:'ticket' },
+    desc:'The Burning Up Tour All Over Again. Sing every word. (Bring your ticket!)' },
   { id:'dance', lv:'BONUS LEVEL', emoji:'🪩', title:'Mission Dance Party', time:'~10:30 PM → midnight', place:'The Mission (spot TBD)', addr:'Mission District, San Francisco, CA', bonus:true,
-    desc:'If anyone has energy left, we dance until midnight, when the birthday girl officially reaches LEVEL 30.',
-    opts:[ {v:'yes',l:"I'm in"}, {v:'maybe',l:'If I have energy'}, {v:'no',l:"Can't"} ] },
+    desc:'If anyone has energy left, we dance until midnight, when the birthday girl officially reaches LEVEL 30.' },
 ];
 const VOTE_LABEL = Object.fromEntries(STOPS.filter(st => st.vote).flatMap(st => st.vote.opts));
 
@@ -960,22 +955,12 @@ function voteTally(stopId = 'dinner'){
 const MINIS = {
   brunch:   { done:'TABLE SECURED', btn:'🥞 Get a table for 11', label:'Attempts', fx:['🥞','🍓','☕'], sfx:'no', lines:[
     "Party of 11? That'll be 45 minutes.", 'The host is pretending not to see you.', 'Table ready! …for 2.', 'Konner smiled at the host. Table ready 🎉'] },
-  panhandle:{ done:'ALL DOGS PET', btn:'🐕 Pet a dog', label:'Dogs pet', fx:['🐕','💛','🐾'], lines:[
-    'Good dog. +5 XP', 'This dog has a better haircut than you.', 'The dog chose Konner instead.', 'Dog stole your hat. Worth it.'] },
   ggp:      { done:'KONNER WINS', btn:'🔴 Challenge Konner to dodgeball', label:'Konner wins', fx:['🔴','💥'], sfx:'no', lines:[
     'Konner wins. Obviously.', 'BONK. You got hit 🔴', 'Konner remains undefeated.', 'Try again? (She will win.)', 'She caught it one-handed.'] },
-  adventure:{ done:'THE MUSHROOM HAS SPOKEN', btn:'🔮 Ask the wise mushroom about the weather', label:'Questions asked', fx:['🔮','🍄','🌊'], lines:[
-    'The mushroom says: Karl the Fog says no.', 'The mushroom says: 54°F at the beach. Bring a jacket.', 'The mushroom says: look at that tree. LOOK at it.', 'The mushroom says: 100% chance Konner stays on dry land 🤢'] },
   dinner:   { done:'DINNER DECIDED', btn:'🍽️ Make Konner pick dinner', label:'Times asked', fx:['🍕','🍜','🎲'], sfx:'no', lines:[
     'Konner: “you pick.”', 'Konner: “no, not that.”', 'Konner: “whatever we’re feeling.”', '45 minutes later, everyone agrees. Konner: “perfect, that’s what I wanted.”'] },
-  ntrain:   { done:'TRAIN ARRIVED', btn:'🚋 Wait for the N', label:'Minutes waited', step:4, fx:['🚋','⏳','👻'], sfx:'no', lines:[
-    'Next N: 4 min.', 'Next N: 12 min.', 'A ghost train passed you by 👻', 'The N finally arrived! All aboard 🚋'] },
   nap:      { done:'FULLY RESTED(ISH)', btn:'💤 Take a 30-year-old nap', label:'Naps taken', fx:['💤','🛌','🦴'], lines:[
     'Your back cracked lying down. Welcome to 30.', 'You set 3 alarms for a 20-minute nap.', 'Woke up groggy and confused. That’s 30, baby.', 'Napped through the group chat. Most 30 thing ever.'] },
-  concert:  { done:'VOICE: GONE', btn:'🎤 Scream for the Jonas Brothers', label:'Screams', fx:['🎤','💙','🔥'], lines:[
-    'Nick looked your way (probably).', 'Joe winked (at somebody).', 'Kevin waved! 👋', 'Konner screamed louder. Konner wins.'] },
-  dance:    { done:'LEVEL 30 REACHED', btn:'🪩 Dance battle Konner', label:'Battles lost', fx:['🪩','💃','🕺'], sfx:'no', lines:[
-    'Konner hit the worm. You lose.', 'Konner is now dancing ON the table.', 'Judges: Konner 30, you 0.', 'It’s midnight. Konner is LEVEL 30. Game over 🎂'] },
 };
 function miniHTML(st){
   const m = MINIS[st.id]; if(!m) return '';
@@ -1322,11 +1307,9 @@ function openBoard(){
   });
   h += `<tr class="total"><td>IN</td>${STOPS.map(s => `<td>${crewFor(s).going.length}</td>`).join('')}</tr></tbody></table>`;
   document.getElementById('boardTable').innerHTML = h;
-  const t = voteTally('dinner'), a = voteTally('adventure');
-  const watched = CHARS.filter(ch => S.data[ch.id]?.ggp?.x?.watched).length;
-  const tix = CHARS.filter(ch => S.data[ch.id]?.concert?.x?.ticket).length;
+
   const responded = CHARS.filter(ch => Object.values(S.data[ch.id] || {}).some(answered)).length;
-  document.getElementById('boardTally').innerHTML = `<span>Players checked in: <b>${responded}/${CHARS.length}</b></span><span>Adventure: 🌊 <b>${a.beach}</b> · 🍄 <b>${a.shrooms}</b> · 🤷 <b>${a.either}</b></span><span>Dinner: 🍕 <b>${t.fiorella}</b> · 🍜 <b>${t.marnee}</b> · 🎲 <b>${t.whatever}</b></span><span>Doc watched: <b>${watched}</b></span><span>Tickets: <b>${tix}</b></span>`;
+  document.getElementById('boardTally').innerHTML = `<span>Players checked in: <b>${responded}/${CHARS.length}</b></span>`;
   document.getElementById('board').classList.add('on');
 }
 
