@@ -1502,6 +1502,10 @@ function stopMusic(){ Chip.stop(); if(unlockEl) unlockEl.pause(); }
     mic:  { c:{G:'#c9d3e6',D:'#8a96ad',K:'#3a3a5c',B:'#5ab0ff'}, g:[".GGGG.","GDGDGG","GGDGDG","GDGDGG",".GGGG.","..BB..","..KK..","..KK..","..KK..","..KK.."] },
     note: { c:{B:'#5ab0ff'}, g:["...BBBB","...B..B","...B..B","...B..B",".BBB.BB","BBBBBBB",".BB.BB."] },
     heart:{ c:{B:'#4f8cff',W:'#bfe0ff'}, g:[".BB.BB.","BWBBBBB","BBBBBBB",".BBBBB.","..BBB..","...B..."] },
+    jelly:{ c:{J:'#ff9ec7',L:'#ffd1e6',T:'#ff7fbf'}, g:["..JJJJ..",".JLLJJJ.","JLJJJJJJ","JJJJJJJJ",".T.T.T.T",".T..T..T","T..T..T.",".T..T..."] },
+    star: { c:{O:'#ff9f1c',Y:'#ffd23f'}, g:["...O...","...O...","OOOYOOO",".OOOOO.","..OOO..",".OO.OO.","O.....O"] },
+    turtle:{ c:{G:'#3ddc84',S:'#2e8b57',K:'#10142e',Y:'#c8e6a0'}, g:["...SSSS....",".GSYSYSS.GG","GGSSYSSSGKG","..SSSSSS.GG",".G.G..G.G.."] },
+    crab: { c:{R:'#ff6b5a',K:'#10142e'}, g:["R.K..K.R","RR.RR.RR",".RRRRRR.","RRRRRRRR",".R.RR.R.","R..R..R."] },
     bunny:{ c:{W:'#f4f1ff',P:'#ff9ec7',K:'#1a1a2e'}, g:["..W...W..",".WPW.WPW.",".WPW.WPW.",".WWW.WWW.","..WWWWW..",".WWWWWWW.",".WKWWWKW.",".WWWPWWW.","..WWWWW..",".WWWWWWW.","WWW...WWW"] },
     football:{ c:{B:'#a0522d',W:'#ffffff'}, g:["...BBBBB...",".BBBBBBBBB.","BBBWBWBWBBB","BBWWWWWWWBB","BBBWBWBWBBB",".BBBBBBBBB.","...BBBBB..."] },
     kickball:{ c:{R:'#e63946',D:'#a8202c',W:'#ffb3b9'}, g:["..RRRR..",".RWRRRR.","RRDRRDRR","RRRDDRRR","RRRDDRRR","RRDRRDRR",".RRRRRR.","..RRRR.."] },
@@ -1518,7 +1522,7 @@ function stopMusic(){ Chip.stop(); if(unlockEl) unlockEl.pause(); }
     url[k] = [c.toDataURL(), w, h];
   }
   window.PROPS = url;
-  const kinds = ['hat','bunny','football','shades','kickball','mic','note','bunny','hat','heart','football','shades','kickball','note','bunny','mic','hat','heart'];
+  const kinds = ['jelly','turtle','star','jelly','crab','turtle','jelly','star','crab','jelly','turtle','star','jelly','crab'];   // sea creatures only
   const box = document.getElementById('bgfx');
   ['fish','fish2','fish3','fish4','fish','fish3','fish2','fish4'].forEach((k, i) => {
     const [src, w, h] = url[k], sc = 3 + (i % 3), img = new Image();
