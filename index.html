@@ -520,7 +520,7 @@ body.in-intro #bgfx{display:none}
       <button class="btn sm" id="closeBoard">✕ Close</button>
     </div>
     <div class="tbl" id="boardTable"></div>
-    <div class="legend">✔ in · ? maybe · ✖ can't</div>
+    <div class="legend">✔ in · ? maybe · ✖ can't · 🎬 watched the doc · 🎟 has ticket</div>
     <div class="tally" id="boardTally"></div>
   </div>
 </div>
@@ -556,7 +556,8 @@ const STOPS = [
   { id:'panhandle', lv:'LV 2', emoji:'🐕', title:'Panhandle Pup Patrol', time:'~12:00 PM', place:'The Panhandle', addr:'The Panhandle, San Francisco, CA',
     desc:'Stroll west down the Panhandle. Every dog you see: +1 XP. Every dog you pet: +5 XP.' },
   { id:'ggp', lv:'LV 3', emoji:'🌳', title:'Meander Through Golden Gate Park', time:'~12:45–2:30 PM', place:'Golden Gate Park', addr:'Golden Gate Park, San Francisco, CA',
-    desc:'Meander, chat and play games (fair warning: the birthday girl is undefeated at kickball, flag football and dodgeball). Somewhere in there, the Theranos Debrief: we break down the Elizabeth Holmes doc "You Can See Everything" (A24). Homework: watch it before Saturday. It\'s only in theaters and runs almost 3 hours, so plan ahead.' },
+    desc:'Meander, chat and play games (fair warning: the birthday girl is undefeated at kickball, flag football and dodgeball). Somewhere in there, the Theranos Debrief: we break down the Elizabeth Holmes doc "You Can See Everything" (A24). REQUIRED: watch it before Saturday. It\'s only in theaters and runs almost 3 hours, so plan ahead.',
+    extra:'watched' },
   { id:'adventure', lv:'LV 4 · CHOOSE YOUR ADVENTURE', emoji:'🎲', title:'Beach or Mushrooms?', time:'~2:30–4:30 PM', place:'Ocean Beach or Golden Gate Park', addr:'Golden Gate Park, San Francisco, CA',
     desc:"We'll do ONE of these, depending on the weather and birthday-girl vibes: 🌊 keep walking west to Ocean Beach (if it's sunny), or 🍄 a mushroom experience in the park for anyone who wants it (sober sidekicks are just as welcome)." },
   { id:'dinner', lv:'LV 5', emoji:'🍝', title:'Feast in the Inner Sunset', time:'~4:30 PM', place:'9th Ave & Irving St', addr:'9th Ave & Irving St, San Francisco, CA',
@@ -566,7 +567,7 @@ const STOPS = [
   { id:'nap', lv:'LV 7', emoji:'💤', title:'The 30-Year-Old Nap', time:'~6:00 PM nap · 6:45 PM regroup', place:'Your home base', home:true,
     desc:"Home for a quick recharge. At 30, a nap isn't a break, it's a lifestyle. Rest up before the Jonas Brothers, then regroup to head to the show." },
   { id:'concert', lv:'LV 8', emoji:'🎤', title:'Jonas Brothers: Final Boss', time:'Doors 6:30 PM · Show 7:30 PM', place:'Chase Center', addr:'1 Warriors Way, San Francisco, CA',
-    desc:'The Burning Up Tour All Over Again. Sing every word. (Bring your ticket!)' },
+    desc:'The Burning Up Tour All Over Again. Sing every word.', extra:'ticket' },
   { id:'dance', lv:'BONUS LEVEL', emoji:'🪩', title:'Mission Dance Party', time:'~10:30 PM → midnight', place:'The Mission (spot TBD)', addr:'Mission District, San Francisco, CA', bonus:true,
     desc:'If anyone has energy left, we dance until midnight, when the birthday girl officially reaches LEVEL 30.' },
 ];
@@ -1309,7 +1310,9 @@ function openBoard(){
   document.getElementById('boardTable').innerHTML = h;
 
   const responded = CHARS.filter(ch => Object.values(S.data[ch.id] || {}).some(answered)).length;
-  document.getElementById('boardTally').innerHTML = `<span>Players checked in: <b>${responded}/${CHARS.length}</b></span>`;
+  const watched = CHARS.filter(ch => S.data[ch.id]?.ggp?.x?.watched).length;
+  const tix = CHARS.filter(ch => S.data[ch.id]?.concert?.x?.ticket).length;
+  document.getElementById('boardTally').innerHTML = `<span>Players checked in: <b>${responded}/${CHARS.length}</b></span><span>Doc watched: <b>${watched}</b></span><span>Tickets: <b>${tix}</b></span>`;
   document.getElementById('board').classList.add('on');
 }
 
