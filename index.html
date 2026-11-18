@@ -439,7 +439,7 @@ body.in-intro #bgfx{display:none}
     <div class="snackboard" id="snackBoard"></div>
     <div class="selfoot">
       <button class="btn sm" id="boardBtn1">📋 Party board</button>
-      <button class="btn sm ghost" id="replayIntro">↺ Replay intro</button>
+      <button class="btn sm ghost" id="replayIntro">📖 Konner's backstory</button>
     </div>
   </section>
 
@@ -1557,7 +1557,7 @@ function stopMusic(){ Chip.stop(); if(unlockEl) unlockEl.pause(); }
 let toastT;
 function toast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2400); }
 
-document.getElementById('pressStart').onclick = () => { SFX.start(); if(LS.get('k30_seen', false)) goSelect(); else { S.intro = 0; renderIntro(); show('intro'); } };
+document.getElementById('pressStart').onclick = () => { SFX.start(); goSelect(); };   // straight to the game; backstory is optional
 document.getElementById('replayIntro').onclick = () => { S.intro = 0; renderIntro(); show('intro'); };
 document.getElementById('switchBtn').onclick = () => { SFX.select(); renderSelect(); show('select'); };
 document.getElementById('diveBtn').onclick = () => { SFX.select(); enterGame(); };
