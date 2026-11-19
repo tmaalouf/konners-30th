@@ -841,7 +841,7 @@ function renderIntro(){
   let inner = `<div class="art">${sc.art}</div><h2 class="px">${sc.h}</h2>`;
   if(sc.stats){
     const egg = LS.get('k30_egg', false);
-    const st = [['KICKBALL',99],['FLAG FB',99],['DODGEBALL',99],['WATER SKI',99],['BRAINS',99],['SILLINESS',100],['SEA LEGS', egg ? 0 : '???'],['LEVEL',30]];
+    const st = [['KICKBALL',100],['DRIVING',100],['TEACHING',100],['KINDNESS',100],['HUMOR',100],['READING',15]];
     inner += `<div style="display:flex;justify-content:center">${spriteImg(charById('bday'),6)}</div><div class="stats">` +
       st.map(([k,v]) => `<div class="stat"><span>${k}</span><div class="bar"><i style="width:${typeof v === 'number' ? Math.min(v,100) : 0}%"></i></div><span>${v}${k==='SEA LEGS' && egg ? ' 🤢' : ''}</span></div>`).join('') + `</div>
     <div class="chips"><span class="chip">💙 FAV COLOR: BLUE</span><span class="chip">🎧 ERA: CHILL MUSIC</span></div>`;
