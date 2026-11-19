@@ -843,8 +843,7 @@ function renderIntro(){
     const egg = LS.get('k30_egg', false);
     const st = [['KICKBALL',100],['DRIVING',100],['TEACHING',100],['KINDNESS',100],['HUMOR',100],['READING',15]];
     inner += `<div style="display:flex;justify-content:center">${spriteImg(charById('bday'),6)}</div><div class="stats">` +
-      st.map(([k,v]) => `<div class="stat"><span>${k}</span><div class="bar"><i style="width:${typeof v === 'number' ? Math.min(v,100) : 0}%"></i></div><span>${v}${k==='SEA LEGS' && egg ? ' 🤢' : ''}</span></div>`).join('') + `</div>
-    <div class="chips"><span class="chip">💙 FAV COLOR: BLUE</span><span class="chip">🎧 ERA: CHILL MUSIC</span></div>`;
+      st.map(([k,v]) => `<div class="stat"><span>${k}</span><div class="bar"><i style="width:${typeof v === 'number' ? Math.min(v,100) : 0}%"></i></div><span>${v}${k==='SEA LEGS' && egg ? ' 🤢' : ''}</span></div>`).join('') + `</div>`;
   } else inner += sc.p.map(t => `<p>${t}</p>`).join('');
   inner += `<div class="introbtns"><button class="btn sm ghost" id="skipIntro">Skip</button><span class="dots">${S.intro+1}/${INTRO.length}</span>
     <button class="btn sm gold" id="nextIntro">${S.intro === INTRO.length-1 ? 'Choose ▶' : 'Next ▶'}</button></div>`;
