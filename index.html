@@ -416,7 +416,7 @@ body.in-intro #bgfx{display:none}
     <div><div class="countdown" id="cd1"></div></div>
     <div><button class="btn gold start blink" id="pressStart">▶ PRESS START</button></div>
     <div class="hint">🔊 sound on for the full experience</div>
-    <div class="foot">10 sea creatures · 9 levels · 1 legend</div>
+    <div class="foot">10 sea creatures · 7 levels · 1 legend</div>
     <div class="badges"><span>💙 100% BLUE</span><span>🐟 FISH APPROVED</span><span>🤿 BEST VIEWED UNDERWATER</span><span>🎤 AUTO-TUNED</span></div>
     <div class="counter">YOU ARE DIVER #<b id="diverN">0000</b></div>
   </section>
@@ -541,32 +541,28 @@ const CHARS = [
   { id:'helbot',  name:'Helbot',        cls:'The Gatherer',        style:'short', hair:'#2b2b2b', shirt:'#8a9bb0', acc:'visor' },
   { id:'perales', name:'Perales',       cls:'BDay Girl Security',  style:'short', hair:'#1a1a1a', shirt:'#111827', acc:'shades' },
   { id:'bones',   name:'Bones',         cls:'Emotional Authority', style:'short', hair:'#9aa0a6', shirt:'#5b2a86' },
-  { id:'sav',     name:'Sav',           cls:'CameraWoman',         style:'long',  hair:'#b03a2e', shirt:'#ff7f11', band:'#ffffff' },
+  { id:'sav',     name:'Savagina',           cls:'CameraWoman',         style:'long',  hair:'#b03a2e', shirt:'#ff7f11', band:'#ffffff' },
   { id:'kimmy',   name:'Kimmy',         cls:'HasTheGuns',          style:'bun',   hair:'#151515', shirt:'#ff4fa3' },
   { id:'rachel',  name:'DaddyGod',        cls:'Daddy',               style:'short', hair:'#a0522d', shirt:'#2e8b57', cap:'#1f5f3a' },
-  { id:'susy',    name:'Susy',          cls:'LiftsCars',           style:'bun',   hair:'#f4d03f', shirt:'#ffffff', pants:'#2d6cdf' },
+  { id:'susy',    name:'ThroatGoat',          cls:'LiftsCars',           style:'bun',   hair:'#f4d03f', shirt:'#ffffff', pants:'#2d6cdf' },
   { id:'gierts',  name:'Gjerts',        cls:'Vibez',               style:'short', hair:'#d4a017', shirt:'#2d6cdf', band:'#a78bfa' },
   { id:'teb',     name:'TEB',           cls:'TechSupport',         style:'cap',   hair:'#222222', shirt:'#334155', cap:'#7cc4ff', acc:'visor' },
 ];
 
 const YES_MAYBE_NO = [ {v:'yes',l:"I'm in"}, {v:'maybe',l:'Maybe'}, {v:'no',l:"Can't"} ];
 const STOPS = [
-  { id:'brunch', lv:'LV 1', emoji:'🥞', title:'Brunch Boss Battle', time:'10:30 AM', place:"That's My Jam", addr:"324 Divisadero St, San Francisco, CA",
-    desc:"The dive begins with breakfast. Small spot, big crew. Be on time: getting the table is the first boss." },
-  { id:'panhandle', lv:'LV 2', emoji:'🐕', title:'Panhandle Pup Patrol', time:'~12:00 PM', place:'The Panhandle', addr:'The Panhandle, San Francisco, CA',
-    desc:'Stroll west down the Panhandle. Every dog you see: +1 XP. Every dog you pet: +5 XP.' },
-  { id:'ggp', lv:'LV 3', emoji:'🌳', title:'Meander Through Golden Gate Park', time:'~12:45–2:30 PM', place:'Golden Gate Park', addr:'Golden Gate Park, San Francisco, CA',
-    desc:'Meander, chat and play games (fair warning: the birthday girl is undefeated at kickball, flag football and dodgeball). Somewhere in there, the Theranos Debrief: we break down the Elizabeth Holmes doc "You Can See Everything" (A24). REQUIRED: watch it before Saturday. It\'s only in theaters and runs almost 3 hours, so plan ahead.',
+  { id:'brunch', lv:'LV 1', emoji:'🥞', title:'Brunch & Coffee', time:'10:30 AM', place:"That's My Jam", addr:"324 Divisadero St, San Francisco, CA",
+    desc:"The dive begins with breakfast and coffee. Small spot, big crew. Be on time: getting the table is the first boss." },
+  { id:'ggp', lv:'LV 2', emoji:'🏈', title:'Flag Football Scrimmage', time:'~12:00 PM', place:'Golden Gate Park', addr:'Golden Gate Park, San Francisco, CA',
+    desc:'Weather allowing, we hit the park for a flag football scrimmage. Fair warning: the birthday girl is undefeated. Pick your team wisely.' },
+  { id:'secret', lv:'LV 3 · CLASSIFIED', emoji:'🤫', title:'The Secret Game', time:'~2:00 PM', place:'Back at our apartment',
+    desc:'Back to our place for a secret game. Details are classified. Bring your A-game. 🤐' },
+  { id:'movie', lv:'LV 4', emoji:'🎬', title:'Movie + Optional Weed Time', time:'~3:30 PM', place:'Our apartment',
+    desc:'Couch, movie, snacks, and some optional weed time for anyone who wants it (zero pressure, just vibes). REQUIRED homework: watch the Elizabeth Holmes doc "You Can See Everything" (A24) before Saturday. It\'s only in theaters and runs almost 3 hours, so plan ahead.',
     extra:'watched' },
-  { id:'adventure', lv:'LV 4 · CHOOSE YOUR ADVENTURE', emoji:'🎲', title:'Beach or Mushrooms?', time:'~2:30–4:30 PM', place:'Ocean Beach or Golden Gate Park', addr:'Golden Gate Park, San Francisco, CA',
-    desc:"We'll do ONE of these, depending on the weather and birthday-girl vibes: 🌊 keep walking west to Ocean Beach (if it's sunny), or 🍄 a mushroom experience in the park for anyone who wants it (sober sidekicks are just as welcome)." },
-  { id:'dinner', lv:'LV 5', emoji:'🍝', title:'Feast in the Inner Sunset', time:'~4:30 PM', place:'9th Ave & Irving St', addr:'9th Ave & Irving St, San Francisco, CA',
-    desc:"Refuel on 9th & Irving: Fiorella (Italian), Marnee Thai, or whatever we're feeling." },
-  { id:'ntrain', lv:'LV 6', emoji:'🚋', title:'Ride the N Judah', time:'~5:45 PM', place:'N Judah → the neighborhood', addr:'Irving St & 9th Ave, San Francisco, CA',
-    desc:'Take the N home, then walk the neighborhood and drop everyone off at their home base.' },
-  { id:'nap', lv:'LV 7', emoji:'💤', title:'The 30-Year-Old Nap', time:'~6:00 PM nap · 6:45 PM regroup', place:'Your home base', home:true,
-    desc:"Home for a quick recharge. At 30, a nap isn't a break, it's a lifestyle. Rest up before the Jonas Brothers, then regroup to head to the show." },
-  { id:'concert', lv:'LV 8', emoji:'🎤', title:'Jonas Brothers: Final Boss', time:'Doors 6:30 PM · Show 7:30 PM', place:'Chase Center', addr:'1 Warriors Way, San Francisco, CA',
+  { id:'nap', lv:'LV 5', emoji:'💤', title:'The 30-Year-Old Nap', time:'~5:00 PM', place:'Our apartment (or your couch)',
+    desc:"Rest, nap and hang. At 30, a nap isn't a break, it's a lifestyle. Recharge before the Jonas Brothers." },
+  { id:'concert', lv:'LV 6', emoji:'🎤', title:'Jonas Brothers: Final Boss', time:'Doors 6:30 PM · Show 7:30 PM', place:'Chase Center', addr:'1 Warriors Way, San Francisco, CA',
     desc:'The Burning Up Tour All Over Again. Sing every word.', extra:'ticket' },
   { id:'dance', lv:'BONUS LEVEL', emoji:'🪩', title:'Mission Dance Party', time:'~10:30 PM → midnight', place:'The Mission (spot TBD)', addr:'Mission District, San Francisco, CA', bonus:true,
     desc:'If anyone has energy left, we dance until midnight, when the birthday girl officially reaches LEVEL 30.' },
@@ -579,7 +575,7 @@ const INTRO = [
   { fx:'sf', art:'🌉', h:'WORLD 3 · SAN FRANCISCO', p:['Googler. Founder of her own company.','Undefeated at kickball, flag football and dodgeball.','Ridiculously silly. Lives near Alamo Square with the best crew around.'] },
   { fx:'chill', art:'🎧', h:'WORLD 4 · THE CHILL ERA', p:['Current era: chill music.','Current favorite color: blue 💙','Headphones on. Vibes immaculate.'] },
   { fx:'stats', art:'👑', h:'PLAYER 1 STATS', stats:true },
-  { fx:'cake', art:'🎂', h:'LEVEL 30 UNLOCKS AT MIDNIGHT', p:['One day. Nine levels. Your whole crew.','Pick your sea creature and RSVP to each stop of the dive.'] },
+  { fx:'cake', art:'🎂', h:'LEVEL 30 UNLOCKS AT MIDNIGHT', p:['One day. Seven levels. Your whole crew.','Pick your sea creature and RSVP to each stop of the dive.'] },
 ];
 
 /* =========================================================
@@ -708,10 +704,10 @@ const SEA = {
     "....OOO.........","...OOOOO........","..OOOKOOOOO.....","...OOOOO.OO.....","....OOOO........","...DOOOO........",
     "..DOOOOOO.......","..DOOOOOOO..BB..","...OOOOOOO.BBBB.","....OOOOOO..BKB.",".....OOOOO..BB..","......OOOO...B..",
     ".......OO.......","......OO........",".....OO.OO......","......OOO......."] },
-  susy: { name:'Car-Lifting Whale', c:{W:'#6c8ebf',L:'#d4e4f7',K:'#10142e',S:'#bfe9ff',C:'#e63946',T:'#111111',G:'#9fd8ff'}, g:[
-    "....CCCC........","...CGCCCC.......","....T..T........","....S.S.........",".....S..........","...WWWWWWW......",
-    ".WWWWWWWWWWW....","WWWWWWWWWWWWW..W","WWKWWWWWWWWWWWWW","WWWWWWWWWWWWWWW.","LLLLLLLWWWWWWW..",".LLLLLLLLWWW....",
-    "...LLLLLL.......","................","................","................"] },
+  susy: { name:'Mighty Mantis Shrimp', c:{G:'#2ec4b6',B:'#3a86ff',O:'#ff9f1c',R:'#ff006e',K:'#10142e',Y:'#ffd23f'}, g:[
+    "............Y.Y.","............K.K.","............Y.Y.","...........GGGG.","..........GGGGRR","GG.....GGGGGGR.R",
+    "GGGGGGGBGGBGG..R",".GGBGGBGGBGGG.RR","GGGGGGGGGGGGG...","GG..O.O.O.O.O...","....O.O.O.O.O...","...O.O.O.O.O....",
+    "................","................","................","................"] },
   gierts: { name:'Vibey Jellyfish', c:{J:'#c4a7ff',L:'#efe6ff',K:'#10142e',M:'#ff7fbf',T:'#a78bfa'}, g:[
     ".....JJJJJ......","...JJLLLLJJJ....","..JLLJJJJJJJJ...",".JLJJJJJJJJJJJ..",".JJJKJJJJJKJJJ..",".JJJJJJMMJJJJJ..",
     ".JJJJJJJJJJJJJ..","..T.T.T..T.T.T..","..T.T..T.T..T...",".T..T..T..T.T...",".T...T.T..T..T..","..T..T..T.T..T..",
@@ -729,7 +725,7 @@ const QUIPS = {
   sav:["say cheese! 📸","one more!","got it. ok one more.","that's the cover photo"],
   kimmy:["check out these claws 💪","sun's out, claws out","do you even lift, bro?","flexing at the brunch table"],
   rachel:["hi, I'm daddy","who's ready to party?","seahorse dads do it all","bring snacks for the kids"],
-  susy:["I lift cars, not boats","need a ride? 🚗","whale hello there","picked up the tab (and a Prius)"],
+  susy:["strongest punch in the sea 🥊","16 color receptors, 0 weaknesses","smartest shrimp in the room 🧠","also, I lift cars"],
   gierts:["vibez only ✨","floating through life","jelly? never heard of her","the vibe is immaculate"],
   teb:["have you tried turning it off and on?","hammering out your tickets 🔨","ticket #30 resolved","it works on my machine"],
 };
@@ -956,10 +952,10 @@ function voteTally(stopId = 'dinner'){
 const MINIS = {
   brunch:   { done:'TABLE SECURED', btn:'🥞 Get a table for 11', label:'Attempts', fx:['🥞','🍓','☕'], sfx:'no', lines:[
     "Party of 11? That'll be 45 minutes.", 'The host is pretending not to see you.', 'Table ready! …for 2.', 'Konner smiled at the host. Table ready 🎉'] },
-  ggp:      { done:'KONNER WINS', btn:'🔴 Challenge Konner to dodgeball', label:'Konner wins', fx:['🔴','💥'], sfx:'no', lines:[
-    'Konner wins. Obviously.', 'BONK. You got hit 🔴', 'Konner remains undefeated.', 'Try again? (She will win.)', 'She caught it one-handed.'] },
-  dinner:   { done:'DINNER DECIDED', btn:'🍽️ Make Konner pick dinner', label:'Times asked', fx:['🍕','🍜','🎲'], sfx:'no', lines:[
-    'Konner: “you pick.”', 'Konner: “no, not that.”', 'Konner: “whatever we’re feeling.”', '45 minutes later, everyone agrees. Konner: “perfect, that’s what I wanted.”'] },
+  ggp:      { done:'KONNER WINS', btn:"🏈 Try to pull Konner's flag", label:'Flags missed', fx:['🏈','💨'], sfx:'no', lines:[
+    'Whiff. She juked you.', 'You grabbed air. Konner is already in the end zone.', 'Konner remains undefeated.', 'Touchdown, Konner. Obviously. 🏈'] },
+  movie:    { done:'MOVIE PICKED', btn:'🎬 Make Konner pick the movie', label:'Times asked', fx:['🎬','🍿','🎲'], sfx:'no', lines:[
+    'Konner: “you pick.”', 'Konner: “no, not that one.”', 'Konner: “whatever we’re feeling.”', '45 minutes of trailers later… Konner: “perfect, that’s what I wanted.”'] },
   nap:      { done:'FULLY RESTED(ISH)', btn:'💤 Take a 30-year-old nap', label:'Naps taken', fx:['💤','🛌','🦴'], lines:[
     'Your back cracked lying down. Welcome to 30.', 'You set 3 alarms for a 20-minute nap.', 'Woke up groggy and confused. That’s 30, baby.', 'Napped through the group chat. Most 30 thing ever.'] },
 };
@@ -977,7 +973,7 @@ function levelHTML(st, i, curIdx){
   const opts = st.opts || YES_MAYBE_NO;
   const lbl = answered(e) ? (opts.find(o => o.v === e.s) || {}).l : '';
   const place = st.home ? homeOf(charById(S.me)).label : st.place;
-  const maps = st.home ? '' : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(st.addr)}" target="_blank" rel="noopener">Open map ↗</a>`;
+  const maps = (st.home || !st.addr) ? '' : `<a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(st.addr)}" target="_blank" rel="noopener">Open map ↗</a>`;
   let extra = '';
   if(st.extra === 'watched') extra = `<div class="extra"><label><input type="checkbox" data-x="watched" ${x.watched ? 'checked' : ''}> I've watched "You Can See Everything" (required)</label>
       ${e.s==='yes' && !x.watched ? '<div class="warn">⚠ Requirement not met! Watch it before Saturday.</div>' : ''}</div>`;
@@ -1079,7 +1075,7 @@ function setExtra(stopId, x){ if(isDone(S.me)){ toast('🔒 Dive log already sub
 /* =========================================================
    THE DIVE — swim through the sea collecting birthday treats
    ========================================================= */
-const SPR_FACE = { helbot:1, bday:1, perales:1, rachel:1, sav:-1, susy:-1, teb:1 };   // which way each sprite faces
+const SPR_FACE = { helbot:1, bday:1, perales:1, rachel:1, sav:-1, susy:1, teb:1 };   // which way each sprite faces
 const G = { x:140, y:200, vx:0, vy:0, sx:null, sy:null, hold:false, keys:{}, cam:0, W:0, H:0, worldW:0, raf:0, last:0, open:null, paused:false, lockToast:0, hintGone:false };
 const SPACING = 540, START = 420;
 const sea = document.getElementById('sea'), world = document.getElementById('world');
@@ -1310,7 +1306,7 @@ function openBoard(){
   document.getElementById('boardTable').innerHTML = h;
 
   const responded = CHARS.filter(ch => Object.values(S.data[ch.id] || {}).some(answered)).length;
-  const watched = CHARS.filter(ch => S.data[ch.id]?.ggp?.x?.watched).length;
+  const watched = CHARS.filter(ch => S.data[ch.id]?.movie?.x?.watched).length;
   const tix = CHARS.filter(ch => S.data[ch.id]?.concert?.x?.ticket).length;
   document.getElementById('boardTally').innerHTML = `<span>Players checked in: <b>${responded}/${CHARS.length}</b></span><span>Doc watched: <b>${watched}</b></span><span>Tickets: <b>${tix}</b></span>`;
   document.getElementById('board').classList.add('on');
@@ -1600,7 +1596,7 @@ function burst(x, y, emojis){
 (function(){
   const tank = document.getElementById('tank'), lead = document.getElementById('snackLead');
   const FOODS = ['🍕','🌮','🍩','🍣','🧁','🍔','🥞','🍜','🍦','🥨'];
-  const FACE = { helbot:1, bday:1, perales:1, rachel:1, sav:-1, susy:-1, teb:1 };   // which way each sprite faces (0 = doesn't matter)
+  const FACE = { helbot:1, bday:1, perales:1, rachel:1, sav:-1, susy:1, teb:1 };   // which way each sprite faces (0 = doesn't matter)
   // Shared leaderboard: everyone's games add to the same counts on the server (falls back to this device in preview)
   let server = null, pending = {}, flushT = null;
   const localScores = LS.get('k30_snacks', {});

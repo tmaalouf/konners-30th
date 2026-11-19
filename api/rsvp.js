@@ -3,7 +3,7 @@
 // POST /api/rsvp {c,s,entry} -> saves one character's answer for one stop
 
 const CHARS = ['bday', 'helbot', 'perales', 'bones', 'sav', 'kimmy', 'rachel', 'susy', 'gierts', 'teb'];
-const STOPS = ['brunch', 'panhandle', 'ggp', 'adventure', 'dinner', 'ntrain', 'nap', 'concert', 'dance', 'done'];
+const STOPS = ['brunch', 'ggp', 'secret', 'movie', 'nap', 'concert', 'dance', 'done'];
 const STATUSES = ['yes', 'maybe', 'no', 'sober'];
 const VOTES = ['fiorella', 'marnee', 'whatever', 'beach', 'shrooms', 'either'];
 const KEY = 'konner30:rsvps';
