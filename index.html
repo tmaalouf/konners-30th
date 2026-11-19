@@ -405,6 +405,15 @@ body.in-intro #bgfx{display:none}
   animation:ringIn var(--d) linear infinite;animation-delay:var(--dl)}
 @keyframes fogOut{0%,42%{opacity:1;scale:1}60%,100%{opacity:0;scale:1.7}}
 @keyframes ringIn{0%,48%{opacity:0;scale:.2;rotate:-40deg}58%{opacity:1;scale:1.35;rotate:12deg}66%,100%{opacity:1;scale:1;rotate:0deg}}
+
+.notecard{max-width:520px;margin:8vh auto 0;text-align:center;border-color:var(--yellow);animation:notePop .6s steps(6),neon 2.4s linear infinite .6s}
+@keyframes notePop{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+.notecrown{font-size:64px;animation:hop 1s steps(4) infinite}
+.notetitle{font-size:12px;line-height:1.8;color:var(--yellow);margin:8px 0 14px}
+.notecard p{font-size:23px;margin:10px 0}
+.noteone{color:var(--gold);font-size:26px!important}
+.notehb{font-family:'Press Start 2P';font-size:13px!important;color:var(--yellow);margin:16px 0 6px!important}
+.notesig{font-size:22px;color:var(--dim);margin:6px 0 16px}
 </style>
 </head>
 <body>
@@ -506,6 +515,19 @@ body.in-intro #bgfx{display:none}
   <div class="foot">Made with 💙 for Konner · Answers are saved for later</div>
 </div>
 
+<!-- BIRTHDAY GIRL'S FINISH-LINE NOTE -->
+<div class="modal" id="bdayNote" role="dialog" aria-modal="true" aria-label="A note for Nanoon">
+  <div class="card notecard">
+    <div class="notecrown">👑</div>
+    <div class="px notetitle">A SPECIAL TREAT<br>FOR THE BIRTHDAY GIRL</div>
+    <p>Nice work, Nanoon! You made it this far and have accomplished so much!</p>
+    <p>I hope you know how much TEB and your found family love you and need you in their lives. Every day is better with you in it and I can't imagine the next 30 years without you by my side.</p>
+    <p class="noteone">You are one of one, my love! 💙</p>
+    <p class="notehb">Happy Birthday!!</p>
+    <div class="notesig">— TEB</div>
+    <button class="btn gold" id="noteClose">💙 Claim my crown</button>
+  </div>
+</div>
 <!-- EASTER EGG -->
 <div class="modal" id="egg" role="dialog" aria-modal="true" aria-label="Seasick mode">
   <div class="card" style="max-width:520px;margin:12vh auto 0;text-align:center">
@@ -559,18 +581,18 @@ const CHARS = [
 const YES_MAYBE_NO = [ {v:'yes',l:"I'm in"}, {v:'maybe',l:'Maybe'}, {v:'no',l:"Can't"} ];
 const STOPS = [
   { id:'brunch', lv:'LV 1', emoji:'🥞', title:'Brunch & Coffee', time:'10:30 AM', place:"That's My Jam", addr:"324 Divisadero St, San Francisco, CA",
-    desc:"The dive begins with breakfast and coffee. Small spot, big crew. Be on time: getting the table is the first boss." },
+    desc:"The dive begins with breakfast and coffee. Small spot, big crew. Be on time: getting the table is the first challenge." },
   { id:'ggp', lv:'LV 2', emoji:'🏈', title:'Flag Football Scrimmage', time:'~12:00 PM', place:'Golden Gate Park', addr:'Golden Gate Park, San Francisco, CA',
     desc:'Weather allowing, we hit the park for a flag football scrimmage. Fair warning: the birthday girl is undefeated. Pick your team wisely.' },
   { id:'secret', lv:'LV 3 · CLASSIFIED', emoji:'🤫', title:'The Secret Game', time:'~2:00 PM', place:'Back at our apartment',
     desc:'Back to our place for a secret game. Details are classified. Bring your A-game. 🤐' },
   { id:'movie', lv:'LV 4', emoji:'🎬', title:'Movie + Optional Weed Time', time:'~3:30 PM', place:'Our apartment',
-    desc:'Couch, movie, snacks, and some optional weed time for anyone who wants it (zero pressure, just vibes). REQUIRED homework: watch the Elizabeth Holmes doc "You Can See Everything" (A24) before Saturday. It\'s only in theaters and runs almost 3 hours, so plan ahead.',
+    desc:'Couch, movie, snacks, and some optional weed time for anyone who wants it (zero pressure, just vibes). REQUIRED homework for discussion: watch the Elizabeth Holmes doc "You Can See Everything" (A24) before Saturday. It\'s only in theaters and runs almost 3 hours, so plan ahead.',
     extra:'watched' },
   { id:'nap', lv:'LV 5', emoji:'💤', title:'The 30-Year-Old Nap', time:'~5:00 PM', place:'Our apartment (or your couch)',
     desc:"Rest, nap and hang. At 30, a nap isn't a break, it's a lifestyle. Recharge before the Jonas Brothers." },
   { id:'concert', lv:'LV 6', emoji:'🎤', title:'Jonas Brothers: Final Boss', time:'Doors 6:30 PM · Show 7:30 PM', place:'Chase Center', addr:'1 Warriors Way, San Francisco, CA',
-    desc:'The Burning Up Tour All Over Again. Sing every word.', extra:'ticket' },
+    desc:'The Burning Up Tour All Over Again. We got GA tickets! 🎟️ Floor spot, front-row energy. Sing every word.', extra:'ticket' },
   { id:'dance', lv:'BONUS LEVEL', emoji:'🪩', title:'Mission Dance Party', time:'~10:30 PM → midnight', place:'The Mission (spot TBD)', addr:'Mission District, San Francisco, CA', bonus:true,
     desc:'If anyone has energy left, we dance until midnight, when the birthday girl officially reaches LEVEL 30.' },
 ];
@@ -853,7 +875,7 @@ function renderIntro(){
     inner += `<div style="display:flex;justify-content:center">${spriteImg(charById('bday'),6)}</div><div class="stats">` +
       st.map(([k,v]) => `<div class="stat"><span>${k}</span><div class="bar"><i style="width:${typeof v === 'number' ? Math.min(v,100) : 0}%"></i></div><span>${v}${k==='SEA LEGS' && egg ? ' 🤢' : ''}</span></div>`).join('') + `</div>`;
   } else inner += sc.p.map(t => `<p>${t}</p>`).join('');
-  inner += `<div class="introbtns"><button class="btn sm ghost" id="skipIntro">Skip</button><span class="dots">${S.intro+1}/${INTRO.length}</span>
+  inner += `<div class="introbtns"><button class="btn sm ghost" id="skipIntro" style="${S.introFirst ? 'visibility:hidden' : ''}">Skip</button><span class="dots">${S.intro+1}/${INTRO.length}</span>
     <button class="btn sm gold" id="nextIntro">${S.intro === INTRO.length-1 ? 'Choose ▶' : 'Next ▶'}</button></div>`;
   const card = document.getElementById('introCard'); card.innerHTML = inner;
   introFx(sc.fx);
@@ -1252,6 +1274,16 @@ function openFinish(){
   document.getElementById('notYet').onclick = () => { treatModal.classList.remove('on'); G.open = null; G.x -= 160; G.paused = false; G.last = performance.now(); };
   document.getElementById('submitDive').onclick = submitDive;
 }
+function heartRain(ms = 4500){
+  const end = Date.now() + ms;
+  (function drop(){
+    if(Date.now() > end) return;
+    burst(Math.random() * innerWidth, Math.random() * innerHeight * .6, ['💙','💖','👑','✨','🎂']);
+    setTimeout(drop, 220);
+  })();
+}
+function showBdayNote(){ document.getElementById('bdayNote').classList.add('on'); SFX.party(); heartRain(); }
+document.getElementById('noteClose').onclick = () => { document.getElementById('bdayNote').classList.remove('on'); SFX.up(); };
 async function submitDive(){
   if(!allAnswered(S.me)) return;
   const entry = { s:'yes', t: Date.now() };
@@ -1260,6 +1292,7 @@ async function submitDive(){
   if(S.mode === 'remote') await loadData();                    // pick up the server's official finish time
   treatModal.classList.remove('on'); G.open = null;
   showCert(S.me); SFX.up(); burst(innerWidth / 2, innerHeight / 3, ['🎉','🎂','🏆','💙','🫧']);
+  if(S.me === 'bday') setTimeout(showBdayNote, 900);       // a special treat just for the birthday girl
 }
 
 // certificate + read-only answers
@@ -1292,6 +1325,7 @@ function showCert(id, quiet){
     </div>
     ${answersHTML(id)}
     <p class="locknote">🔒 Answers are locked in.${mineToo ? ' Thanks for diving! See you Saturday 💙' : ''}</p>
+    ${id === 'bday' && mineToo ? '<div style="text-align:center;margin-top:10px"><button class="btn gold" onclick="showBdayNote()">💌 Read your birthday note</button></div>' : ''}
     <div class="fineprint"><b>⚠ FINE PRINT</b>Everything is weather-dependent and birthday-girl-vibes-dependent. The itinerary is entirely subject to change.</div>`;
   show('cert');
   if(!quiet) SFX.coin();
@@ -1546,8 +1580,8 @@ function stopMusic(){ Chip.stop(); if(unlockEl) unlockEl.pause(); }
 let toastT;
 function toast(msg){ const t = document.getElementById('toast'); t.textContent = msg; t.classList.add('on'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 2400); }
 
-document.getElementById('pressStart').onclick = () => { SFX.start(); goSelect(); };   // straight to the game; backstory is optional
-document.getElementById('replayIntro').onclick = () => { S.intro = 0; renderIntro(); show('intro'); };
+document.getElementById('pressStart').onclick = () => { SFX.start(); if(LS.get('k30_seen', false)) goSelect(); else { S.intro = 0; S.introFirst = true; renderIntro(); show('intro'); } };   // backstory is required the first time on each device
+document.getElementById('replayIntro').onclick = () => { S.intro = 0; S.introFirst = false; renderIntro(); show('intro'); };
 document.getElementById('switchBtn').onclick = () => { SFX.select(); renderSelect(); show('select'); };
 document.getElementById('diveBtn').onclick = () => { SFX.select(); enterGame(); };
 document.getElementById('backG').onclick = () => { SFX.select(); renderSelect(); show('select'); };
